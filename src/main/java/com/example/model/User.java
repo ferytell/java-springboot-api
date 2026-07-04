@@ -1,6 +1,12 @@
 package com.example.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -15,6 +21,15 @@ public class User {
   @NotBlank(message = "Name is required")
   @Column(nullable = false)
   private String name;
+
+  @Column(nullable = false, unique = true)
+  private String username;
+
+  @Column(name = "full_name")
+  private String fullName;
+
+  @Column(name = "role")
+  private String role = "ROLE_USER";
 
   @NotBlank(message = "Email is required")
   @Email(message = "Email should be valid")
@@ -33,7 +48,6 @@ public class User {
     createdAt = System.currentTimeMillis();
   }
 
-  // Getters and Setters
   public Long getId() {
     return id;
   }
@@ -48,6 +62,30 @@ public class User {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 
   public String getEmail() {
