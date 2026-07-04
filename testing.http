@@ -1,0 +1,68 @@
+//GET http://localhost:8095/api/ping
+
+### Get All Decks
+GET http://localhost:8095/api/decks
+### GET Deck by ID
+GET http://localhost:8095/api/decks/2
+### Create Deck
+POST http://localhost:8095/api/decks
+Content-Type: application/json
+
+{
+"title": "randommm",
+"description": "I need a job"
+}
+
+### Edit Deck
+PUT http://localhost:8095/api/decks/1
+Content-Type: application/json
+
+{
+"title": "Edited Decck",
+"description": "This is an edited deck"
+}
+
+### Delete Deck
+DELETE http://localhost:8095/api/decks/3
+
+### Get Cards by Deck ID
+GET http://localhost:8095/api/decks/1/cards
+
+### Create FlashCard
+POST http://localhost:8095/api/decks/1/cards
+Content-Type: application/json
+
+{
+"question": "大きい",
+"answer": "Ookii (Big)",
+"category": "Japanese"
+}
+
+###
+GET http://localhost:8095/api/users
+
+### 
+POST http://localhost:8095/api/signup HTTP/1.1
+Content-Type: application/json
+
+{
+"Name": "John Doe",
+"Email": "johndoe@mail.com",
+"Password": "passwod123",
+"Age": 30
+}
+
+###
+POST http://localhost:8095/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+"Email": "johndoe@mail.com",
+"Password": "passwod123"
+}   
+###
+POST http://localhost:8095/api/logout HTTP/1.1
+Authorization Bearer xxxx
+Content-Type: application/json
+
+{}
