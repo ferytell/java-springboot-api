@@ -1,0 +1,69 @@
+# ==========================================
+# Build Artifacts & Compiled Code
+# ==========================================
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven build directory
+target/
+
+# Gradle build directory
+build/
+.gradle/
+
+# ==========================================
+# IDE and Editor Files
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.metadata/
+.classpath
+.project
+.settings/
+*.launch
+bin/
+.factorypath
+
+# Visual Studio Code
+.vscode/
+
+# STS (Spring Tool Suite)
+.sts4-cache/
+.springBeans/
+
+# ==========================================
+# Environment Configurations & Secrets
+# ==========================================
+.env
+.env.local
+*.properties.local
+*.yml.local
+
+# Optional: Ignore specific production secrets file
+# application-prod.properties
+
+# ==========================================
+# Log Files and System Dumps
+# ==========================================
+*.log
+logs/
+hs_err_pid*
+replay_pid*
+
+# ==========================================
+# OS Specific Files
+# ==========================================
+.DS_Store
+Thumbs.db

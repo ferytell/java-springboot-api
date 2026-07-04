@@ -1,0 +1,12 @@
+/home/ferytell/Java/src/main/java/com/example/controller/FlashcardController.java
+/home/ferytell/Java/src/main/java/com/example/repository/FlashcardRepository.java
+/home/ferytell/Java/src/main/java/com/example/model/Deck.java
+/home/ferytell/Java/src/main/java/com/example/service/DeckService.java
+/home/ferytell/Java/src/main/java/com/example/repository/UserRepository.java
+/home/ferytell/Java/src/main/java/com/example/model/Flashcard.java
+/home/ferytell/Java/src/main/java/com/example/controller/UserController.java
+/home/ferytell/Java/src/main/java/com/example/App.java
+/home/ferytell/Java/src/main/java/com/example/service/UserService.java
+/home/ferytell/Java/src/main/java/com/example/SpringBootApiApplication.java
+/home/ferytell/Java/src/main/java/com/example/model/User.java
+/home/ferytell/Java/src/main/java/com/example/repository/DeckRepository.java
