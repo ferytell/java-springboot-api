@@ -12,11 +12,11 @@ public class Flashcard {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank(message = "Question is required")
+  @NotBlank(message = "Kana is required")
   @Column(nullable = false)
   private String question;
 
-  @NotBlank(message = "Answer is required")
+  @NotBlank(message = "Latin is required")
   @Column(nullable = false)
   private String answer;
 
