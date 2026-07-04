@@ -2,7 +2,7 @@ name: Deploy Java API to Ubuntu Server
 
 on:
   push:
-    branches: ["master", "main"]  # Include both just in case
+    branches: ["master", "main"] # Include both just in case
 
 jobs:
   deploy:
@@ -14,8 +14,8 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
           cache: maven
 
       - name: Build with Maven
@@ -27,7 +27,7 @@ jobs:
       - name: Create deployment directory
         run: |
           mkdir -p /home/ferytell/java-springboot-api/deploy
-          
+
       - name: Deploy JAR
         run: |
           sudo -n /usr/bin/systemctl stop java-api || true
@@ -48,4 +48,3 @@ jobs:
           if [ -f app.jar ]; then
             cp app.jar "app.jar.$(date +%Y%m%d_%H%M%S)"
           fi
-s
