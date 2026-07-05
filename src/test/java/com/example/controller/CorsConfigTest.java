@@ -20,11 +20,11 @@ class CorsConfigTest {
     @Test
     void preflightRequestShouldReturnCorsHeadersForReactOrigin() throws Exception {
         mockMvc.perform(options("/api/auth/login")
-                        .header("Origin", "http://localhost:5173")
+                        .header("Origin", "http://localhost:*")
                         .header("Access-Control-Request-Method", "POST")
                         .header("Access-Control-Request-Headers", "Authorization, Content-Type"))
                 .andExpect(status().isOk())
-                .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5173"))
+                .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:*"))
                 .andExpect(header().string("Access-Control-Allow-Credentials", "true"))
                 .andExpect(header().string("Access-Control-Allow-Methods", org.hamcrest.Matchers.containsString("POST")));
     }

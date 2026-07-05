@@ -13,7 +13,7 @@ import java.util.List;
 @Configuration
 public class WebConfig {
 
-    @Value("${cors.allowed-origins:http://localhost:5173,http://localhost:3000}")
+    @Value("${cors.allowed-origins:http://localhost:5173,https://flashcard.ferytell.online,http://localhost:8585}")
     private String allowedOrigins;
 
     @Value("${cors.allowed-methods:GET,POST,PUT,DELETE,OPTIONS}")

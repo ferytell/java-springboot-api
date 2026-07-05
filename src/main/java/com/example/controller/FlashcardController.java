@@ -86,4 +86,53 @@ public ResponseEntity<Flashcard> getFlashcardById(@PathVariable Long deckId, @Pa
        return ResponseEntity.notFound().build();
      }
    }
+
+
+   //searc
+     @GetMapping("/decks/search")
+    public ResponseEntity<List<Deck>> searchDecks(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String keyword) {
+        
+        List<Deck> decks;
+        
+        if (keyword != null && !keyword.isEmpty()) {
+            decks = deckService.searchDecksByKeyword(keyword);
+        } else if (title != null && !title.isEmpty()) {
+            decks = deckService.searchDecksByTitle(title);
+        } else if (description != null && !description.isEmpty()) {
+            decks = deckService.searchDecksByDescription(description);
+        } else {
+            decks = deckService.getAllDecks();
+        }
+        
+        return ResponseEntity.ok(decks);
+    }
+    
+    @GetMapping("/cards/search")
+    public ResponseEntity<List<Flashcard>> searchFlashcards(
+            @RequestParam(required = false) String question,
+            @RequestParam(required = false) String answer,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String keyword) {
+        
+        List<Flashcard> flashcards;
+        
+        if (keyword != null && !keyword.isEmpty()) {
+            flashcards = deckService.searchFlashcardsByKeyword(keyword);
+        } else if (question != null && !question.isEmpty()) {
+            flashcards = deckService.searchFlashcardsByQuestion(question);
+        } else if (answer != null && !answer.isEmpty()) {
+            flashcards = deckService.searchFlashcardsByAnswer(answer);
+        } else if (category != null && !category.isEmpty()) {
+            flashcards = deckService.searchFlashcardsByCategory(category);
+        } else {
+            flashcards = List.of();
+        }
+        
+        return ResponseEntity.ok(flashcards);
+    }
+    
+  
 }

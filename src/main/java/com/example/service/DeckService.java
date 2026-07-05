@@ -100,4 +100,32 @@ public class DeckService {
         flashcardRepository.delete(cardToDelete);
     }
 
+    public List<Deck> searchDecksByTitle(String title) {
+        return deckRepository.findByTitleContainingIgnoreCase(title);
+    }
+    public List<Deck> searchDecksByDescription(String description) {
+        return deckRepository.findByDescriptionContainingIgnoreCase(description);
+    }
+    public List<Deck> searchDecksByKeyword(String keyword) {
+        return deckRepository.searchDecksByKeyword(keyword);
+    }
+
+    public List<Flashcard> searchFlashcardsByQuestion(String question) {
+        return flashcardRepository.findByQuestionContainingIgnoreCase(question);
+    }
+    public List<Flashcard> searchFlashcardsByAnswer(String answer) {
+        return flashcardRepository.findByAnswerContainingIgnoreCase(answer);
+    }
+    public List<Flashcard> searchFlashcardsByCategory(String category) {
+        return flashcardRepository.findByCategoryIgnoreCase(category);
+    }
+    public List<Flashcard> searchFlashcardsByKeyword(String keyword) {
+        return flashcardRepository.searchFlashcardsByKeyword(keyword);
+    }
+    public List<Flashcard> searchFlashcardsInDeckByCategory(Long deckId, String category) {
+        return flashcardRepository.findByDeckIdAndCategoryIgnoreCase(deckId, category);
+    }
+    public List<Flashcard> searchFlashcardsInDeckByKeyword(Long deckId, String keyword) {
+        return flashcardRepository.searchFlashcardsInDeckByKeyword(deckId, keyword);
+    }
 }

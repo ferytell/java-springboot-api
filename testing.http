@@ -3,18 +3,23 @@
 ### Get All Decks
 GET http://localhost:8095/api/decks
 ### GET Deck by ID
-GET http://localhost:8095/api/decks/2
+GET http://localhost:8095/api/decks/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
+Content-Type: application/json
+
 ### Create Deck
 POST http://localhost:8095/api/decks
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
 Content-Type: application/json
 
 {
-"title": "randommm",
+"title": "Testingss",
 "description": "I need a job"
 }
 
 ### Edit Deck
 PUT http://localhost:8095/api/decks/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
 Content-Type: application/json
 
 {
@@ -27,9 +32,14 @@ DELETE http://localhost:8095/api/decks/3
 
 ### Get Cards by Deck ID
 GET http://localhost:8095/api/decks/1/cards
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
+### Get Flashcard by ID
+GET http://localhost:8095/api/decks/1/cards/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
 
 ### Create FlashCard
 POST http://localhost:8095/api/decks/1/cards
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
 Content-Type: application/json
 
 {
@@ -38,28 +48,64 @@ Content-Type: application/json
 "category": "Japanese"
 }
 
-###
-GET http://localhost:8095/api/users
+### Edit FlashCard
+PUT http://localhost:8095/api/decks/1/cards/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw 
+Content-Type: application/json
 
-### 
-POST http://localhost:8095/api/signup HTTP/1.1
+{   
+    "question": "Edited Question",
+    "answer": "Edited Answer",
+    "category": "Edited Category"
+}
+### Create New User
+POST  http://localhost:8095/api/auth/register
 Content-Type: application/json
 
 {
-"Name": "John Doe",
-"Email": "johndoe@mail.com",
-"Password": "passwod123",
-"Age": 30
+"username": "johndoe",
+"email": "jhon@mail.com",
+"password": "passwod123",
+"fullName": "John Doe"
 }
 
-###
-POST http://localhost:8095/api/login HTTP/1.1
+
+### Create New User
+POST  http://localhost:8095/api/auth/register
 Content-Type: application/json
 
 {
-"Email": "johndoe@mail.com",
-"Password": "passwod123"
+"email": "ferererewre@gmail.com",
+"fullName": "Feri Love",
+"password": "fuckthis",
+"username": "ferytell"
+}
+### login User
+POST http://localhost:8095/api/auth/login
+Content-Type: application/json
+
+{
+"username": "johndoe",
+"password": "passwod123"
+}
+
+### login User with email
+POST http://localhost:8095/api/auth/login
+Content-Type: application/json
+
+{
+"email": "johndoe@mail.com",
+"password": "passwod123"
 }   
+
+### Search deck by name
+GET http://localhost:8095/api/decks/search?title=edit
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU3NTc2LCJleHAiOjE3ODM3NjIzNzZ9.rlzSyAboRzALVHZcsXarSmKitNgGrYnkHa4YrM3uocw
+
+
+### "token": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzgzMTU2MDk4LCJleHAiOjE3ODM3NjA4OTh9.AGqeTh0zmj7sP3StulyrcI-LJ1VDex2mLVogvnR9CSo"
+### "username": "johndoe",
+### "role": "ROLE_USER"
 ###
 POST http://localhost:8095/api/logout HTTP/1.1
 Authorization Bearer xxxx
