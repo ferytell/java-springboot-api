@@ -2,7 +2,7 @@ name: Deploy Java API to Ubuntu Server
 
 on:
   push:
-    branches: ["master", "main"] # Include both just in case
+    branches: ["master", "main"]
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: "21"
           distribution: "temurin"
-          cache: none
+          package-manager: "maven"
 
       - name: Build with Maven
         run: mvn clean package -DskipTests
