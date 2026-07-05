@@ -133,6 +133,4 @@ public ResponseEntity<Flashcard> getFlashcardById(@PathVariable Long deckId, @Pa
         
         return ResponseEntity.ok(flashcards);
     }
-    
-  
 }
