@@ -7,14 +7,15 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class FlashcardController {
-
+  private static final Logger log = LoggerFactory.getLogger(FlashcardController.class);
   private final DeckService deckService;
 
   public FlashcardController(DeckService deckService) {
@@ -59,6 +60,13 @@ public class FlashcardController {
     return ResponseEntity.ok(deckService.getFlashcardsForDeck(deckId));
   }
 
+  // @GetMapping("/decks/{deckId}/cards/{cardId}")
+  // public ResponseEntity<Flashcard> getFlashcardById(@PathVariable Long deckId, @PathVariable Long cardId) {
+  //   return deckService.getFlashcardById(cardId)
+  //       .map(ResponseEntity::ok)
+  //       .orElse(ResponseEntity.notFound().build());
+  // }
+
   @PostMapping("/decks/{deckId}/cards")
   public ResponseEntity<Flashcard> createFlashcard(@PathVariable Long deckId, @Valid @RequestBody Flashcard flashcard) {
     try {
@@ -68,4 +76,14 @@ public class FlashcardController {
       return ResponseEntity.notFound().build();
     }
   }
+
+  // @PutMapping("/decks/{deckId}/cards/{cardId}")
+  // public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long deckId, @Valid @RequestBody Flashcard flashcard) {
+  //   try {
+  //     Flashcard updatedCard = deckService.updateFlashcard(deckId, flashcard);
+  //     return ResponseEntity.ok(updatedCard);
+  //   } catch (RuntimeException ex) {
+  //     return ResponseEntity.notFound().build();
+  //   }
+  // }
 }

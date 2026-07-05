@@ -53,6 +53,10 @@ public class Deck {
     return flashcards;
   }
 
+  // public List<Flashcard> getFlashcardById() {
+  //   return flashcards;
+  // }
+
   public void setFlashcards(List<Flashcard> flashcards) {
     this.flashcards = flashcards;
   }

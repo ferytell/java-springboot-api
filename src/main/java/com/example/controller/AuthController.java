@@ -1,12 +1,7 @@
-
 package com.example.controller;
 
-import com.example.dto.AuthRequest;
-import com.example.dto.AuthResponse;
-import com.example.dto.RegisterRequest;
-import com.example.model.User;
-import com.example.repository.UserRepository;
-import com.example.util.security.JwtUtil;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +10,28 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+
+import com.example.dto.AuthRequest;
+import com.example.dto.AuthResponse;
+import com.example.dto.RegisterRequest;
+import com.example.model.User;
+import com.example.repository.UserRepository;
+import com.example.util.security.JwtUtil;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+    private static final org.slf4j.Logger log =
+        org.slf4j.LoggerFactory.getLogger(AuthController.class);
+
+
 
     @Autowired
     private AuthenticationManager authenticationManager;

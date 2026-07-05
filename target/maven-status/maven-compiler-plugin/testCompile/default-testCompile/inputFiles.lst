@@ -1,2 +1,4 @@
 /home/ferytell/Java/src/test/java/com/example/AppTest.java
 /home/ferytell/Java/src/test/java/com/example/controller/FlashcardControllerTest.java
+/home/ferytell/Java/src/test/java/com/example/controller/AuthControllerTest.java
+/home/ferytell/Java/src/test/java/com/example/controller/CorsConfigTest.java

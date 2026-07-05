@@ -58,4 +58,10 @@ public class DeckService {
   public List<Flashcard> getFlashcardsForDeck(Long deckId) {
     return flashcardRepository.findByDeckId(deckId);
   }
+
+  // public List<Flashcard> getFlashcardById(Long cardId) {
+  //   return flashcardRepository.findById(cardId)
+  //           .map(List::of)
+  //           .orElse(List.of());
+  // }
 }

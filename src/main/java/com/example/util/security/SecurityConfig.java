@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,18 +27,24 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
+                        // For OPTIONS requests (CORS preflight), allow all origins
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.OPTIONS, "/**")).permitAll()
+                        
+                        // Public endpoints
                         .requestMatchers(
-                                new AntPathRequestMatcher("/api/auth/**", HttpMethod.GET.name()),
-                                new AntPathRequestMatcher("/api/auth/**", HttpMethod.POST.name()),
-                                new AntPathRequestMatcher("/api/public/**"),
-                                new AntPathRequestMatcher("/actuator/health")
+                                AntPathRequestMatcher.antMatcher("/api/auth/**"),
+                                AntPathRequestMatcher.antMatcher("/api/public/**"),
+                                AntPathRequestMatcher.antMatcher("/actuator/health")
                         ).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/decks", HttpMethod.GET.name())).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/decks/*", HttpMethod.GET.name())).authenticated()
-                        .requestMatchers(new AntPathRequestMatcher("/api/admin/**")).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/user/**")).hasAnyRole("USER", "ADMIN")
-                        .anyRequest().authenticated())
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/decks")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/decks/*")).authenticated()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/admin/**")).hasRole("ADMIN")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/user/**")).hasAnyRole("USER", "ADMIN")
+                        
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
