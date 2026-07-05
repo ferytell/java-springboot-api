@@ -39,7 +39,9 @@ public class SecurityConfig {
                                 AntPathRequestMatcher.antMatcher("/actuator/health")
                         ).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/decks")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/decks/*")).authenticated()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/decks/**")).authenticated()
+                         .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/api/decks/**")).authenticated()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/api/decks/**")).authenticated()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/admin/**")).hasRole("ADMIN")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/user/**")).hasAnyRole("USER", "ADMIN")
                         

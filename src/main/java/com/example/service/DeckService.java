@@ -59,9 +59,45 @@ public class DeckService {
     return flashcardRepository.findByDeckId(deckId);
   }
 
-  // public List<Flashcard> getFlashcardById(Long cardId) {
-  //   return flashcardRepository.findById(cardId)
-  //           .map(List::of)
-  //           .orElse(List.of());
-  // }
+  public Optional<Flashcard> getFlashcardById(Long deckId, Long cardId) {
+    return deckRepository.findById(deckId)
+        .flatMap(deck -> deck.getFlashcards().stream()
+            .filter(card -> card.getId().equals(cardId))
+            .findFirst());
+  }
+
+
+
+  public Flashcard updateFlashcardById(Long deckId, Long cardId, Flashcard flashcardDetails) {
+        Deck deck = deckRepository.findById(deckId)
+            .orElseThrow(() -> new RuntimeException("Deck not found with id " + deckId));
+        
+        Flashcard existingCard = deck.getFlashcards().stream()
+            .filter(card -> card.getId().equals(cardId))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Flashcard not found with id " + cardId + " in deck " + deckId));
+        
+        existingCard.setQuestion(flashcardDetails.getQuestion());
+        existingCard.setAnswer(flashcardDetails.getAnswer());
+        
+      
+        if (flashcardDetails.getCategory() != null) {
+            existingCard.setCategory(flashcardDetails.getCategory());
+        }
+        
+        return flashcardRepository.save(existingCard);
+    }
+    
+    public void deleteFlashcard(Long deckId, Long cardId) {
+        Deck deck = deckRepository.findById(deckId)
+            .orElseThrow(() -> new RuntimeException("Deck not found with id " + deckId));
+        
+        Flashcard cardToDelete = deck.getFlashcards().stream()
+            .filter(card -> card.getId().equals(cardId))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Flashcard not found with id " + cardId + " in deck " + deckId));
+        
+        flashcardRepository.delete(cardToDelete);
+    }
+
 }
